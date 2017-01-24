@@ -1,0 +1,12 @@
+<application>
+    <name>Fixture for Assignment on Git</name>
+    <description>A fixture to prepare components required for the assignment</description>
+    <version>1.0</version>
+    <authors>
+        <author email="ugo.pattacini@iit.it">Ugo Pattacini</author>
+    </authors>
+    <module>
+        <name>assignment_git</name>
+        <node>testnode</node>
+    </module>
+ </application>
