@@ -15,19 +15,18 @@
 
 using namespace std;
 using namespace RTF;
-using namespace yarp::rtf;
 using namespace yarp::os;
 using namespace yarp::math;
 
 /**********************************************************************/
-class TestAssignmentGit : public TestCase
+class TestAssignmentGit : public yarp::rtf::TestCase
 {
     RpcClient portGit;
 
 public:
     /******************************************************************/
     TestAssignmentGit() :
-        TestCase("TestAssignmentGit")
+        yarp::rtf::TestCase("TestAssignmentGit")
     {
     }
 
