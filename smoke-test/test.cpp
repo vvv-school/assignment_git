@@ -6,28 +6,28 @@
 
 #include <string>
 
-#include <yarp/rtf/TestCase.h>
 #include <rtf/dll/Plugin.h>
 #include <rtf/TestAssert.h>
 
-
+#include <yarp/rtf/TestCase.h>
 #include <yarp/os/all.h>
 #include <yarp/math/Rand.h>
 
 using namespace std;
 using namespace RTF;
+using namespace yarp::rtf;
 using namespace yarp::os;
 using namespace yarp::math;
 
 /**********************************************************************/
-class TestAssignmentGit : public yarp::rtf::TestCase
+class TestAssignmentGit : public TestCase
 {
     RpcClient portGit;
 
 public:
     /******************************************************************/
     TestAssignmentGit() :
-        yarp::rtf::TestCase("TestAssignmentGit")
+        TestCase("TestAssignmentGit")
     {
     }
 
