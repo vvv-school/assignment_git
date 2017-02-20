@@ -6,8 +6,10 @@
 
 #include <string>
 
-#include <rtf/yarp/YarpTestCase.h>
+#include <yarp/rtf/TestCase.h>
 #include <rtf/dll/Plugin.h>
+#include <rtf/TestAssert.h>
+
 
 #include <yarp/os/all.h>
 #include <yarp/math/Rand.h>
@@ -18,14 +20,14 @@ using namespace yarp::os;
 using namespace yarp::math;
 
 /**********************************************************************/
-class TestAssignmentGit : public YarpTestCase
+class TestAssignmentGit : public yarp::rtf::TestCase
 {
     RpcClient portGit;
 
 public:
     /******************************************************************/
     TestAssignmentGit() :
-        YarpTestCase("TestAssignmentGit")
+        yarp::rtf::TestCase("TestAssignmentGit")
     {
     }
 
