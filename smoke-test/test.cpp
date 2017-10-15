@@ -47,8 +47,8 @@ public:
         portGit.asPort().setTimeout(rpcTmo);
 
         RTF_TEST_REPORT("Connecting Ports");
-        RTF_ASSERT_ERROR_IF(Network::connect(portGitName,"/service"),
-                            "Unable to connect to /service");
+        RTF_ASSERT_ERROR_IF_FALSE(Network::connect(portGitName,"/service"),
+                                  "Unable to connect to /service");
 
         Rand::init();
 
@@ -69,7 +69,7 @@ public:
 
         Bottle cmd,reply;
         cmd.addInt(num);
-        RTF_ASSERT_ERROR_IF(portGit.write(cmd,reply),"Unable to talk to the module");
+        RTF_ASSERT_ERROR_IF_FALSE(portGit.write(cmd,reply),"Unable to talk to the module");
 
         string response=reply.get(0).asString();
         RTF_TEST_CHECK(response==(num&0x01?"odd":"even"),
