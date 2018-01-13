@@ -3,6 +3,7 @@
 // Author: Ugo Pattacini - <ugo.pattacini@iit.it>
 
 #include <string>
+#include <cmath>
 
 #include <yarp/os/Network.h>
 #include <yarp/os/LogStream.h>
@@ -27,7 +28,7 @@ int main()
     Port port;
     port.open("/service");
 
-    // wait for the first incoming request
+    // wait for the incoming request
     Bottle request;
     port.read(request,true);
 
@@ -36,11 +37,14 @@ int main()
 
     // process the payload
     bool isNumEven=true;    // FILL IN THE CODE
+    bool isNumPrime=true;   // FILL IN THE CODE
 
     // build the response
-    string isNumEvenStr=(isNumEven?"even":"odd");
+    string parity=(isNumEven?"even":"odd");
+    string primality=(isNumPrime?"prime":"composite");
     Bottle response;
-    response.addString("dummy"); // FILL IN THE CODE
+    response.addString("parity-dummy");     // FILL IN THE CODE
+    response.addString("primality-dummy");  // FILL IN THE CODE
 
     // send back the response
     port.reply(response);

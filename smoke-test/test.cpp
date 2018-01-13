@@ -5,6 +5,7 @@
 */
 
 #include <string>
+#include <cmath>
 
 #include <rtf/dll/Plugin.h>
 #include <rtf/TestAssert.h>
@@ -22,6 +23,23 @@ using namespace yarp::math;
 class TestAssignmentGit : public yarp::rtf::TestCase
 {
     RpcClient portGit;
+
+    /******************************************************************/
+    string parityTest(const int i) const
+    {
+        return (i&0x01?"odd":"even");
+    }
+
+    /******************************************************************/
+    string primalityTest(const int i) const
+    {
+        if (i<2)
+            return "composite";
+        for (int j=2; j<=sqrt(i); j++)
+            if (i%j==0)
+                return "composite";
+        return "prime";
+    }
 
 public:
     /******************************************************************/
@@ -66,15 +84,24 @@ public:
     virtual void run()
     {
         int num=(int)Rand::scalar(1.0,100.0);
+        string parity=parityTest(num);
+        string primality=primalityTest(num);
 
         Bottle cmd,reply;
         cmd.addInt(num);
         RTF_ASSERT_ERROR_IF_FALSE(portGit.write(cmd,reply),"Unable to talk to the module");
 
-        string response=reply.get(0).asString();
-        RTF_TEST_CHECK(response==(num&0x01?"odd":"even"),
-                       Asserter::format("Request=%d; Response=%s",
-                                        num,response.c_str()));
+        string parityRx=reply.get(0).asString();
+        string primalityRx=reply.get(1).asString();
+
+        RTF_TEST_REPORT(Asserter::format("Request=%d; Response=%s; Result=%s",
+                                         num,parityRx.c_str(),parity.c_str()));
+        RTF_TEST_REPORT(Asserter::format("Request=%d; Response=%s; Result=%s",
+                                         num,primalityRx.c_str(),primality.c_str()));
+
+        int score=(parityRx==parity?1:0);
+        score+=(primalityRx==primality?2:0);
+        RTF_TEST_CHECK(score>0,Asserter::format("Total score = %d",score));
     }
 };
 

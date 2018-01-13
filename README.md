@@ -6,7 +6,7 @@ By now, you should be familiar with [**Git**](https://git-scm.com).
 
 # Assignment
 We have prepared a very rudimental server that receives via a [Yarp](http://www.yarp.it/index.html) port an integer,
-computes if it is **even** or **odd** and then provides back the response.
+computes if it is **even** or **odd** as well as **prime** or **composite** and then provides back the response.
 
 We are not interested here in how Yarp plumbing works but rather we want you to
 fix the present code using Git and GitHub.
