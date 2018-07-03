@@ -2,8 +2,9 @@
 //
 // Author: Ugo Pattacini - <ugo.pattacini@iit.it>
 
-#include <string>
+#include <cstdlib>
 #include <cmath>
+#include <string>
 
 #include <yarp/os/Network.h>
 #include <yarp/os/LogStream.h>
@@ -21,7 +22,7 @@ int main()
     if (!yarp.checkNetwork())
     {
         yError()<<"YARP doesn't seem to be available";
-        return 1;
+        return EXIT_FAILURE;
     }
 
     // open a port to receive requests
@@ -52,5 +53,5 @@ int main()
     // shut down
     port.close();
 
-    return 0;
+    return EXIT_SUCCESS;
 }
