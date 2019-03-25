@@ -7,20 +7,20 @@
 #include <string>
 #include <cmath>
 
-#include <rtf/dll/Plugin.h>
-#include <rtf/TestAssert.h>
+#include <robottestingframework/dll/Plugin.h>
+#include <robottestingframework/TestAssert.h>
 
-#include <yarp/rtf/TestCase.h>
+#include <yarp/robottestingframework/TestCase.h>
 #include <yarp/os/all.h>
 #include <yarp/math/Rand.h>
 
 using namespace std;
-using namespace RTF;
+using namespace robottestingframework;
 using namespace yarp::os;
 using namespace yarp::math;
 
 /**********************************************************************/
-class TestAssignmentGit : public yarp::rtf::TestCase
+class TestAssignmentGit : public yarp::robottestingframework::TestCase
 {
     RpcClient portGit;
 
@@ -44,7 +44,7 @@ class TestAssignmentGit : public yarp::rtf::TestCase
 public:
     /******************************************************************/
     TestAssignmentGit() :
-        yarp::rtf::TestCase("TestAssignmentGit")
+        yarp::robottestingframework::TestCase("TestAssignmentGit")
     {
     }
 
@@ -61,11 +61,11 @@ public:
         string portGitName("/"+getName());
         portGit.open(portGitName);
 
-        RTF_TEST_REPORT(Asserter::format("Set rpc timeout = %g [s]",rpcTmo));
+        ROBOTTESTINGFRAMEWORK_TEST_REPORT(Asserter::format("Set rpc timeout = %g [s]",rpcTmo));
         portGit.asPort().setTimeout(rpcTmo);
 
-        RTF_TEST_REPORT("Connecting Ports");
-        RTF_ASSERT_ERROR_IF_FALSE(Network::connect(portGitName,"/service"),
+        ROBOTTESTINGFRAMEWORK_TEST_REPORT("Connecting Ports");
+        ROBOTTESTINGFRAMEWORK_ASSERT_ERROR_IF_FALSE(Network::connect(portGitName,"/service"),
                                   "Unable to connect to /service");
 
         Rand::init();
@@ -76,7 +76,7 @@ public:
     /******************************************************************/
     virtual void tearDown()
     {
-        RTF_TEST_REPORT("Closing Ports");
+        ROBOTTESTINGFRAMEWORK_TEST_REPORT("Closing Ports");
         portGit.close();
     }
 
@@ -89,20 +89,20 @@ public:
 
         Bottle cmd,reply;
         cmd.addInt(num);
-        RTF_ASSERT_ERROR_IF_FALSE(portGit.write(cmd,reply),"Unable to talk to the module");
+        ROBOTTESTINGFRAMEWORK_ASSERT_ERROR_IF_FALSE(portGit.write(cmd,reply),"Unable to talk to the module");
 
         string parityRx=reply.get(0).asString();
         string primalityRx=reply.get(1).asString();
 
-        RTF_TEST_REPORT(Asserter::format("Request=%d; Response=%s; Result=%s",
+        ROBOTTESTINGFRAMEWORK_TEST_REPORT(Asserter::format("Request=%d; Response=%s; Result=%s",
                                          num,parityRx.c_str(),parity.c_str()));
-        RTF_TEST_REPORT(Asserter::format("Request=%d; Response=%s; Result=%s",
+        ROBOTTESTINGFRAMEWORK_TEST_REPORT(Asserter::format("Request=%d; Response=%s; Result=%s",
                                          num,primalityRx.c_str(),primality.c_str()));
 
         int score=(parityRx==parity?1:0);
         score+=(primalityRx==primality?2:0);
-        RTF_TEST_CHECK(score>0,Asserter::format("Total score = %d",score));
+        ROBOTTESTINGFRAMEWORK_TEST_CHECK(score>0,Asserter::format("Total score = %d",score));
     }
 };
 
-PREPARE_PLUGIN(TestAssignmentGit)
+ROBOTTESTINGFRAMEWORK_PREPARE_PLUGIN(TestAssignmentGit)
