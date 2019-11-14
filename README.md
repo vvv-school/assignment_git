@@ -1,6 +1,8 @@
 Simple Assignment for Git and GitHub Classroom
 ==============================================
 
+[![Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://www.gitpod.io/docs/10_getting_started)
+
 # Prerequisites
 By now, you should be familiar with [**Git**](https://git-scm.com).
 
