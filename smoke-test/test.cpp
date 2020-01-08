@@ -65,8 +65,8 @@ public:
         portGit.asPort().setTimeout(rpcTmo);
 
         ROBOTTESTINGFRAMEWORK_TEST_REPORT("Connecting Ports");
-        ROBOTTESTINGFRAMEWORK_ASSERT_ERROR_IF_FALSE(Network::connect(portGitName,"/service"),
-                                  "Unable to connect to /service");
+        if (!Network::connect(portGitName,"/service"))
+            ROBOTTESTINGFRAMEWORK_ASSERT_FAIL("Unable to connect to /service");
 
         Rand::init();
 
@@ -89,7 +89,8 @@ public:
 
         Bottle cmd,reply;
         cmd.addInt(num);
-        ROBOTTESTINGFRAMEWORK_ASSERT_ERROR_IF_FALSE(portGit.write(cmd,reply),"Unable to talk to the module");
+        if (!portGit.write(cmd,reply))
+            ROBOTTESTINGFRAMEWORK_ASSERT_FAIL("Unable to talk to the module");
 
         string parityRx=reply.get(0).asString();
         string primalityRx=reply.get(1).asString();
