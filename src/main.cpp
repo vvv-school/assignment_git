@@ -17,7 +17,7 @@ using namespace yarp::os;
 /***************************************************/
 int main()
 {
-    // init link to Yarp network
+    // init link to YARP network
     Network yarp;
     if (!yarp.checkNetwork())
     {
