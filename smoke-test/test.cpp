@@ -33,8 +33,6 @@ class TestAssignmentGit : public yarp::robottestingframework::TestCase
     /******************************************************************/
     string primalityTest(const int i) const
     {
-        if (i<2)
-            return "composite";
         for (int j=2; j<=sqrt(i); j++)
             if (i%j==0)
                 return "composite";
@@ -83,7 +81,7 @@ public:
     /******************************************************************/
     virtual void run()
     {
-        int num=(int)Rand::scalar(1.0,100.0);
+        int num=(int)Rand::scalar(2.0,100.0);
         string parity=parityTest(num);
         string primality=primalityTest(num);
 
