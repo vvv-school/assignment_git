@@ -34,6 +34,7 @@ int main()
     port.read(request,true);
 
     // retrieve the request payload
+    // we'll make sure not to send you 1; trust us ;)
     int num=request.get(0).asInt();
 
     // process the payload
