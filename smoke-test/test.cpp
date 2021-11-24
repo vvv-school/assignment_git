@@ -54,7 +54,7 @@ public:
     /******************************************************************/
     virtual bool setup(yarp::os::Property& property)
     {
-        float rpcTmo=(float)property.check("rpc-timeout",Value(10.0)).asDouble();
+        float rpcTmo=(float)property.check("rpc-timeout",Value(10.0)).asFloat64();
 
         string portGitName("/"+getName());
         portGit.open(portGitName);
@@ -86,7 +86,7 @@ public:
         string primality=primalityTest(num);
 
         Bottle cmd,reply;
-        cmd.addInt(num);
+        cmd.addInt32(num);
         if (!portGit.write(cmd,reply))
             ROBOTTESTINGFRAMEWORK_ASSERT_FAIL("Unable to talk to the module");
 

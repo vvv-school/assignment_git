@@ -35,7 +35,7 @@ int main()
 
     // retrieve the request payload
     // we'll make sure not to send you 1; trust us ;)
-    int num=request.get(0).asInt();
+    int num=request.get(0).asInt32();
 
     // process the payload
     bool isNumEven=true;    // FILL IN THE CODE
